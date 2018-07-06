@@ -20,7 +20,16 @@ public class ShopIndexController {
 
 	@RequestMapping("/shopMenu")
 	public String menu(Model model) {
-		model.addAttribute("shop", sessionInfo.getLoginShop());
+//		ShopAdmin sAdmin = sessionInfo.getLoginShop();
+//		Integer loginShopId = sAdmin.getShopAdminId();
+//		ShopInfo shopInfo = adminService.locator(loginShopId);
+
+//		sessionInfo.setShopProfile(shopInfo);
+
+//		model.addAttribute("shop",sessionInfo.getShopProfile());
+
+		String test ="店舗名テストです";
+		model.addAttribute("shop",test);
 		return "shopMenu";
 	}
 

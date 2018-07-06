@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:if test="${empty sAdmin}">
+<%-- <c:if test="${empty sAdmin}">
   <c:redirect url="/shopIndex"/>
-</c:if>
+</c:if> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,8 +49,8 @@
 					src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
 					alt="" width="72" height="72">
 		<main role="main" class="inner cover">
-		<h1 class="cover-heading">店舗名が入ります</h1>
-		<p class="lead">コメントコメントコメント</p>
+		<h1 class="cover-heading">${fn:escapeXml(shop)}</h1>
+		<%-- <p class="lead">${fn:escapeXml(sAdmin.shopadmin_name)}さん、お疲れ様です。</p> --%>
 		<p class="lead">
 			<a href="shopProfile" class="btn btn-warning btn-block">店舗詳細管理</a>
 		</p>

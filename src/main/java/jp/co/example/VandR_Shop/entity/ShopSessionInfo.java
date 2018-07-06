@@ -14,9 +14,9 @@ public class ShopSessionInfo implements Serializable {
 
     private ShopAdmin loginShop;
 
-//	private ReservationInfo newReserv;
+    private ShopInfo prevShopProfile;
 
-//	private ReservationInfo prevReserv;
+	private  ShopInfo newShopProfile;
 
 
 	public ShopAdmin getLoginShop() {
@@ -25,6 +25,22 @@ public class ShopSessionInfo implements Serializable {
 
 	public void setLoginShop(ShopAdmin loginShop) {
 		this.loginShop = loginShop;
+	}
+
+	public ShopInfo getPrevShopProfile() {
+		return prevShopProfile;
+	}
+
+	public void setPrevShopProfile(ShopInfo prevShopProfile) {
+		this.prevShopProfile = prevShopProfile;
+	}
+
+	public ShopInfo getNewShopProfile() {
+		return newShopProfile;
+	}
+
+	public void setNewShopProfile(ShopInfo newShopProfile) {
+		this.newShopProfile = newShopProfile;
 	}
 
 //	public ReservationInfo getNewReserv() {
@@ -45,7 +61,7 @@ public class ShopSessionInfo implements Serializable {
 
 	public void invalidate() {
 		loginShop = null;
-//		newReserv = null;
-//		prevReserv = null;
+		newShopProfile = null;
+		prevShopProfile = null;
 	}
 }

@@ -53,26 +53,26 @@
 				<p class="error">${fn:escapeXml(errmsg)}</p>
 			</c:if>
 
-	<form action="shopSeatsUpdate" method="post">
+	<form:form action="shopSeatsUpdate" method="post" modelAttribute="seatUpdateForm">
 		<fieldset>
 			<div class="row">
 				<div class="col-3">
 					<label for="updateSeats">カウンター</label>
-					<form:input id="updateSeats" class="form-control" type="text" path="1table" placeholder="席数を入力してください。例:5" />
+					<form:input id="updateSeats" class="form-control" type="text" path="seatType" placeholder="席数を入力してください。例:5" />
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-3">
 					<label for="updateSeats">2人テーブル</label>
-					<form:input id="updateSeats" class="form-control" type="text" path="2table" placeholder="席数を入力してください。例:15" />
+					<form:input id="updateSeats" class="form-control" type="text" path="seatType" placeholder="席数を入力してください。例:15" />
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-3">
 					<label for="updateSeats">4人テーブル</label>
-					<form:input id="updateSeats" class="form-control" type="text" path="4table" placeholder="席数を入力してください。例:10" />
+					<form:input id="updateSeats" class="form-control" type="text" path="seatType" placeholder="席数を入力してください。例:10" />
 				</div>
 			</div>
 		</fieldset>
@@ -87,7 +87,7 @@
 			</div>
 		</div>
 
-	</form>
+	</form:form>
 	<div>
 		<a href="shopMenu" class="btn btn-default btn-block">メニュー</a>
 	</div>

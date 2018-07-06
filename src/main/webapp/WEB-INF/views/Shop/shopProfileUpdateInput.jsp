@@ -188,6 +188,7 @@ $('#ok').click(function(){
         return false;
     }else{
         /*　OKの時の処理 */
+
         location.href = 'shopProfileUpdareResult';
     }
 });

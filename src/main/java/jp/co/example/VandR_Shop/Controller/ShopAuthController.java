@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.co.example.VandR_Shop.Form.ShopLoginForm;
 import jp.co.example.VandR_Shop.entity.ShopAdmin;
+import jp.co.example.VandR_Shop.entity.ShopInfo;
 import jp.co.example.VandR_Shop.entity.ShopSessionInfo;
 import jp.co.example.VandR_Shop.service.impl.ShopAdminService;
+import jp.co.example.VandR_Shop.service.impl.ShopInfoService;
 
 @Controller
 public class ShopAuthController {
@@ -25,6 +27,9 @@ public class ShopAuthController {
 
 	@Autowired
 	private ShopAdminService adminService;
+
+	@Autowired
+	private ShopInfoService shopService;
 
 	@Autowired
 	private ShopSessionInfo sessionInfo;
@@ -45,16 +50,35 @@ public class ShopAuthController {
 			return "shopLogin";
 		}
 
-		ShopAdmin sAdmin = adminService.authentication(form.getShopId(), form.getPassword());
+		String id = form.getShopId();
+
+		try {
+		int intId = Integer.parseInt(id);
+
+		ShopAdmin sAdmin = adminService.authentication(intId, form.getPassword());
 
 		if (sAdmin == null) {
 			model.addAttribute("errmsg", errorMsg);
 			return "shopLogin";
 		} else {
+			ShopInfo shop = shopService.locator(intId);
 			sessionInfo.setLoginShop(sAdmin);
+			sessionInfo.setPrevShopProfile(shop);
+			String test ="店舗名テストです";
+			model.addAttribute("shop",test);
 			model.addAttribute("sAdmin", sessionInfo.getLoginShop());
 			return "shopMenu";
 		}
+
+		}catch(NumberFormatException e){
+			model.addAttribute("errmsg", errorMsg);
+			return "shopLogin";
+		}
+	}
+
+	@RequestMapping("/shopProfile")
+	public String profile(Model model) {
+		return "shopProfile";
 	}
 
 	@RequestMapping(value = "/shopLogout", method = RequestMethod.GET)

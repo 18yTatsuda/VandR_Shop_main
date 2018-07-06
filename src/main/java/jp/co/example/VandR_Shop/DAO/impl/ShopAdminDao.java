@@ -18,7 +18,7 @@ public class ShopAdminDao implements IShopAdminDao{
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Override
-	public ShopAdmin findByIdAndPassword(String id, String password) {
+	public ShopAdmin findByIdAndPassword(Integer id, String password) {
 		String sql = "SELECT * FROM shopadmin WHERE shop_id = :shopId AND password = :password";
 		MapSqlParameterSource param = new MapSqlParameterSource();
 		param.addValue("shopId", id);
