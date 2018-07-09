@@ -34,7 +34,7 @@
 </c:if>
 
 		<label for="inputShopId" class="sr-only">店舗ID</label>
-		<form:input id="inputShopId" class="form-control" placeholder="店舗ID" path="shopId"/><!-- required autofocus -->
+		<form:input id="inputShopId" class="form-control" placeholder="店舗ID" path="loginId"/><!-- required autofocus -->
 
 		<label for="inputPassword" class="sr-only">パスワード</label>
 		<form:password id="inputPassword" class="form-control" placeholder="パスワード" path="password" /> <!-- required -->

@@ -49,8 +49,8 @@
 					src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
 					alt="" width="72" height="72">
 		<main role="main" class="inner cover">
-		<h1 class="cover-heading">${fn:escapeXml(shop)}</h1>
-		<%-- <p class="lead">${fn:escapeXml(sAdmin.shopadmin_name)}さん、お疲れ様です。</p> --%>
+		<h1 class="cover-heading">${fn:escapeXml(shop.shop_name)}</h1>
+		<p class="lead">${fn:escapeXml(sAdmin.shopadmin_name)}さん、お疲れ様です。</p>
 		<p class="lead">
 			<a href="shopProfile" class="btn btn-warning btn-block">店舗詳細管理</a>
 		</p>

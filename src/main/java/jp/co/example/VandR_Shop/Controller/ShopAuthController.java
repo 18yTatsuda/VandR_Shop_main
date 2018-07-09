@@ -2,6 +2,8 @@ package jp.co.example.VandR_Shop.Controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -41,7 +43,7 @@ public class ShopAuthController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginShop(@Validated @ModelAttribute("shopLoginForm") ShopLoginForm form, BindingResult bindingResult,
-			Model model) {
+			HttpSession session,Model model) {
 
 		String errorMsg = messageSource.getMessage("login.error", null, Locale.getDefault());
 
@@ -50,22 +52,27 @@ public class ShopAuthController {
 			return "shopLogin";
 		}
 
-		String id = form.getShopId();
+		String id = form.getLoginId();
 
 		try {
-		int intId = Integer.parseInt(id);
+		int loginId = Integer.parseInt(id);
 
-		ShopAdmin sAdmin = adminService.authentication(intId, form.getPassword());
+		ShopAdmin sAdmin = adminService.authentication(loginId, form.getPassword());
 
 		if (sAdmin == null) {
 			model.addAttribute("errmsg", errorMsg);
 			return "shopLogin";
 		} else {
-			ShopInfo shop = shopService.locator(intId);
+			session.setAttribute("loginShop",id);
+
+			ShopInfo shop = shopService.locator(loginId);
+
+			session.setAttribute("loginShop", shop);
+
 			sessionInfo.setLoginShop(sAdmin);
 			sessionInfo.setPrevShopProfile(shop);
-			String test ="店舗名テストです";
-			model.addAttribute("shop",test);
+
+			model.addAttribute("shop",sessionInfo.getPrevShopProfile());
 			model.addAttribute("sAdmin", sessionInfo.getLoginShop());
 			return "shopMenu";
 		}
@@ -78,6 +85,10 @@ public class ShopAuthController {
 
 	@RequestMapping("/shopProfile")
 	public String profile(Model model) {
+			ShopAdmin admin = sessionInfo.getLoginShop();
+			shopService.locator(admin.getShop_id());
+			model.addAttribute("shop", sessionInfo.getPrevShopProfile());
+			model.addAttribute("sAdmin",sessionInfo.getLoginShop());
 		return "shopProfile";
 	}
 

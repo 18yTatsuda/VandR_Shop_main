@@ -26,10 +26,9 @@ public class ShopIndexController {
 
 //		sessionInfo.setShopProfile(shopInfo);
 
-//		model.addAttribute("shop",sessionInfo.getShopProfile());
 
-		String test ="店舗名テストです";
-		model.addAttribute("shop",test);
+		model.addAttribute("shop",sessionInfo.getPrevShopProfile());
+		model.addAttribute("sAdmin", sessionInfo.getLoginShop());
 		return "shopMenu";
 	}
 

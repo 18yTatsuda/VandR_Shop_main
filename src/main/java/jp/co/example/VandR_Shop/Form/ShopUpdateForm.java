@@ -1,12 +1,25 @@
 package jp.co.example.VandR_Shop.Form;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ShopUpdateForm {
 
+	@NotNull
 	private Integer shop_id;
+
+	@NotBlank
 	private String shop_name;
+
+	@NotBlank
 	private String telephone;
+
+	@NotNull
 	private Integer category_id;
+
+	@NotNull
 	private Integer region_id;
+
 	private String budget;
 	private String numberofseats;
 	private String comment;

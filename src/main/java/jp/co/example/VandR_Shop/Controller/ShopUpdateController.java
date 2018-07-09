@@ -1,14 +1,20 @@
 package jp.co.example.VandR_Shop.Controller;
 
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.example.VandR_Shop.Form.ShopUpdateForm;
+import jp.co.example.VandR_Shop.entity.ShopAdmin;
 import jp.co.example.VandR_Shop.entity.ShopInfo;
 import jp.co.example.VandR_Shop.entity.ShopSessionInfo;
 import jp.co.example.VandR_Shop.service.impl.ShopInfoService;
@@ -22,7 +28,7 @@ public class ShopUpdateController {
     MessageSource messageSource;
 
 	@Autowired
-	private ShopInfoService shopInfoService;
+	private ShopInfoService shopService;
 
 //	@RequestMapping("/shopSeatsUpdateInput")
 //	public String seatsInput(Model model) {
@@ -33,15 +39,25 @@ public class ShopUpdateController {
 
 	@RequestMapping("/shopProfileUpdateInput")
 	public String profileInput(Model model) {
+		ShopAdmin admin = sessionInfo.getLoginShop();
+		shopService.locator(admin.getShop_id());
+		model.addAttribute("shop", sessionInfo.getPrevShopProfile());
 		model.addAttribute("sAdmin",sessionInfo.getLoginShop());
 		return "shopProfileUpdateInput";
 	}
 
 	@RequestMapping("/shopUpdate")
-	public String update(@ModelAttribute("shopUpdateForm") ShopUpdateForm form,BindingResult bindingResult,
-			Model model) {
+	public String update(@Validated @ModelAttribute("shopUpdateForm") ShopUpdateForm form,BindingResult bindingResult,
+			HttpSession session,Model model) {
 
-		ShopInfo beforeShop = sessionInfo.getPrevShopProfile();
+		String errorMsg = messageSource.getMessage("shopupdate.error", null, Locale.getDefault());
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("errmsg", errorMsg);
+			return "shopProfileUpdateInput";
+		}
+
+		ShopInfo beforeShop = (ShopInfo) session.getAttribute("loginShop");
 
 		ShopInfo afterShop = new ShopInfo();
 		afterShop.setShop_id(beforeShop.getShop_id());
@@ -58,7 +74,7 @@ public class ShopUpdateController {
 		afterShop.setStarttime(form.getStarttime());
 		afterShop.setFinishtime(form.getFinishtime());
 
-		shopInfoService.update(afterShop);
+		shopService.update(afterShop);
 
 		model.addAttribute("sAdmin",sessionInfo.getLoginShop());
 

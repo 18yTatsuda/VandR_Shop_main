@@ -8,19 +8,19 @@ public class ShopAdmin implements Serializable {
 	private String shopadmin_name;
 	private String password;
 
-	public Integer getShopAdminId() {
+	public Integer getShop_id() {
 		return shop_id;
 	}
 
-	public void setShopAdminId(Integer shop_id) {
+	public void setShop_id(Integer shop_id) {
 		this.shop_id = shop_id;
 	}
 
-	public String getShopAdminName() {
+	public String getShopadmin_name() {
 		return shopadmin_name;
 	}
 
-	public void setShopAdminName(String shopadmin_name) {
+	public void setShopadmin_name(String shopadmin_name) {
 		this.shopadmin_name = shopadmin_name;
 	}
 

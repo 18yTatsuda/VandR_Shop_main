@@ -8,17 +8,17 @@ import javax.validation.constraints.NotBlank;
 public class ShopLoginForm {
 
 	@NotBlank
-	private String shopId;
+	private String loginId;
 
 	@NotBlank
 	private String password;
 
-	public String getShopId() {
-		return shopId;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setShopId(String _shopId) {
-		this.shopId = _shopId;
+	public void setLoginId(String _loginId) {
+		this.loginId = _loginId;
 	}
 
 	public String getPassword() {
