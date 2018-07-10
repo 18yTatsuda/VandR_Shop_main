@@ -51,25 +51,33 @@
 							<th>来店予定時刻</th>
 							<th>希望席種別</th>
 							<th>キャンセル</th>
+							<th>退店<th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>テスト</td>
-							<td>テスト</td>
-							<td>テスト</td>
-							<td>テスト</td>
-							<td><a class="btn btn-danger" href="shopReservationDelete"
-								role="button">キャンセルする</a></td>
-						</tr>
-						<c:forEach items="${userlist}" var="user">
+
+						<c:forEach items="${reservelist}" var="reserve">
 							<tr>
-								<td>${fn:escapeXml(user.userName)}</td>
-								<td>${fn:escapeXml(user.userPeoples)}</td>
-								<td>${fn:escapeXml(user.visitTime)}</td>
-								<td>${fn:escapeXml(user.seatType)}</td>
-								<td><a class="btn btn-danger" href="shopReservationDelete"
-									role="button">キャンセルする</a></td>
+								<td>${fn:escapeXml(reserve.reservation.user_name)}</td>
+								<td>${fn:escapeXml(reserve.reservation.num)}</td>
+								<td>${fn:escapeXml(reserve.reservation.time)}</td>
+								<td>${fn:escapeXml(reserve.seat.seattype)}</td>
+								<td>
+								<form:form action="shopReservationDelete" method="POST" >
+							<button type="submit" class="btn btn-danger"
+							name="shopReservationDelete" value="${fn:escapeXml(reserve.reservation.reservation_id)}">
+							キャンセルする
+							</button>
+							</form:form>
+							</td>
+							<td>
+														<form:form action="shopReservationLeave" method="POST">
+							<button type="submit" class="btn btn-success"
+							name="shopReservationLeave" value="${fn:escapeXml(reserve.reservation.reservation_id)}">
+							退店
+							</button>
+							</form:form>
+							</td>
 							</tr>
 						</c:forEach>
 					</tbody>

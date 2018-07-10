@@ -16,45 +16,49 @@
 <link href="/css/shopCarousel.css" rel="stylesheet">
 </head>
 <body>
-	<header> <nav
-		class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> <a
-		class="navbar-brand" href="#">VandR System</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarCollapse" aria-controls="navbarCollapse"
-		aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarCollapse">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="shopMenu">メニュー<span
-					class="sr-only">(current)</span></a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="shopReservationCheck">予約確認</a></li>
-			<li class="nav-item"><a class="nav-link" href="shopLogout">ログアウト</a>
-			</li>
-		</ul>
-	</div>
-	</nav> </header>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand" href="#">VandR System</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarCollapse" aria-controls="navbarCollapse"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						href="shopMenu">メニュー<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="shopReservationCheck">予約確認</a></li>
+					<li class="nav-item"><a class="nav-link" href="shopLogout">ログアウト</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 	<div class="container">
 		<div class="py-5 text-center">
 			<img class="d-block mx-auto mb-4"
 				src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg"
 				alt="" width="72" height="72">
 			<h3>この予約をキャンセルします、よろしいですか？</h3>
-			<p>お客様名：${fn:escapeXml(user.userName)}テスト</p>
-			<p>人数：${fn:escapeXml(user.userPeoples)}テスト</p>
-			<p>来店予定時間：${fn:escapeXml(user.visitTime)}テスト</p>
-			<p>希望席種別：${fn:escapeXml(user.seatType)}テスト</p>
-			<a class="btn btn-danger" href="shopReservationDeleteResult"
-				role="button">キャンセルする</a> <a class="btn btn-default"
-				href="shopReservationCheck" role="button">予約確認画面に戻る</a>
+			<p>お客様名：${fn:escapeXml(reserve.reservation.user_name)}</p>
+			<p>人数：${fn:escapeXml(reserve.reservation.num)}</p>
+			<p>来店予定時間：${fn:escapeXml(reserve.reservation.time)}</p>
+			<p>希望席種別：${fn:escapeXml(reserve.seat.seattype)}</p>
+			<form:form action="shopReservationDeleteResult" method="POST"
+				modelAttribute="reservation">
+				<button type="submit" class="btn btn-danger"
+					name="shopReservationDeleteResult" value="${fn:escapeXml(reserve.reservation.reservation_id)}">キャンセルする</button>
+			</form:form>
+			<a class="btn btn-default" href="shopReservationCheck" role="button">予約確認画面に戻る</a>
 		</div>
 	</div>
-<footer class="mastfoot mt-auto">
+	<footer class="mastfoot mt-auto">
 		<div class="inner">
-			<p class="mt-5 mb-3 text-muted">&copy; Copyright © 2018
-				VandR System.All Righys Reserved.</p>
+			<p class="mt-5 mb-3 text-muted">&copy; Copyright © 2018 VandR
+				System.All Righys Reserved.</p>
 		</div>
-		</footer>
+	</footer>
 </body>
 </html>

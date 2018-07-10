@@ -22,6 +22,7 @@ import jp.co.example.VandR_Shop.service.impl.ShopInfoService;
 
 @Controller
 public class ShopUpdateController {
+
 	@Autowired
 	private ShopSessionInfo sessionInfo;
 
@@ -31,31 +32,8 @@ public class ShopUpdateController {
 	@Autowired
 	private ShopInfoService shopService;
 
-//	@RequestMapping("/shopSeatsUpdateInput")
-//	public String seatsInput(Model model) {
-//		//ショップ情報をセッションにいれておく
-//		model.addAttribute("sAdmin",sessionInfo.getLoginShop());
-//		return "shopSeatsUpdateInput";
-//	}
-
 	@RequestMapping("/shopProfileUpdateInput" )
 	public String profileInput(Model model) {
-
-//		Map<Integer,String> category = new HashMap<Integer, String>();
-//		category.put(1, "和食");
-//		category.put(2, "中華");
-//		category.put(3, "イタリアン");
-//		category.put(4, "フレンチ");
-//
-//		model.addAttribute("category",category);
-
-//		Map<Integer,String> budget = new HashMap<Integer, String>();
-//		budget.put(1,"～1000");
-//		budget.put(2,"1000～1999");
-//		budget.put(3,"2000～2999");
-//		budget.put(4,"3000～4999");
-//		budget.put(5,"5000～");
-
 
 		ShopAdmin admin = sessionInfo.getLoginShop();
 		shopService.locator(admin.getShop_id());

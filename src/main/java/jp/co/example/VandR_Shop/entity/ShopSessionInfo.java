@@ -19,6 +19,12 @@ public class ShopSessionInfo implements Serializable {
 	private  ShopInfo newShopProfile;
 
 
+	private int user_id;
+
+	private int vacancy_id;
+
+
+
 	public ShopAdmin getLoginShop() {
 		return loginShop;
 	}
@@ -43,21 +49,24 @@ public class ShopSessionInfo implements Serializable {
 		this.newShopProfile = newShopProfile;
 	}
 
-//	public ReservationInfo getNewReserv() {
-//		return newReserv;
-//	}
-//
-//	public void setNewReserv(ReservationInfo newReserv) {
-//		this.newReserv = newReserv;
-//	}
-//
-//	public ReservationInfo getPrevReserv() {
-//		return prevReserv;
-//	}
-//
-//	public void setPrevReserv(ReservationInfo prevReserv) {
-//		this.prevReserv = prevReserv;
-//	}
+
+	public int getVacancy_id() {
+		return vacancy_id;
+	}
+
+	public void setVacancy_id(int vacancy_id) {
+		this.vacancy_id = vacancy_id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+
 
 	public void invalidate() {
 		loginShop = null;
