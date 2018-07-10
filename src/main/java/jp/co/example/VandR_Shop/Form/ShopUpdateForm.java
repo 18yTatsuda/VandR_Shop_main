@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 
 public class ShopUpdateForm {
 
+	//private MultipartFile multipartFile;
+
 	@NotNull
 	private Integer shop_id;
 

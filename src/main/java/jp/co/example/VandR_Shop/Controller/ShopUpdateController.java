@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.co.example.VandR_Shop.Form.ShopUpdateForm;
 import jp.co.example.VandR_Shop.entity.ShopAdmin;
@@ -37,8 +38,25 @@ public class ShopUpdateController {
 //		return "shopSeatsUpdateInput";
 //	}
 
-	@RequestMapping("/shopProfileUpdateInput")
+	@RequestMapping("/shopProfileUpdateInput" )
 	public String profileInput(Model model) {
+
+//		Map<Integer,String> category = new HashMap<Integer, String>();
+//		category.put(1, "和食");
+//		category.put(2, "中華");
+//		category.put(3, "イタリアン");
+//		category.put(4, "フレンチ");
+//
+//		model.addAttribute("category",category);
+
+//		Map<Integer,String> budget = new HashMap<Integer, String>();
+//		budget.put(1,"～1000");
+//		budget.put(2,"1000～1999");
+//		budget.put(3,"2000～2999");
+//		budget.put(4,"3000～4999");
+//		budget.put(5,"5000～");
+
+
 		ShopAdmin admin = sessionInfo.getLoginShop();
 		shopService.locator(admin.getShop_id());
 		model.addAttribute("shop", sessionInfo.getPrevShopProfile());
@@ -46,23 +64,35 @@ public class ShopUpdateController {
 		return "shopProfileUpdateInput";
 	}
 
-	@RequestMapping("/shopUpdate")
-	public String update(@Validated @ModelAttribute("shopUpdateForm") ShopUpdateForm form,BindingResult bindingResult,
-			HttpSession session,Model model) {
+	@RequestMapping(value = "/shopUpdate", method = RequestMethod.POST)
+	public String update(@Validated @ModelAttribute("shopUpdateForm") ShopUpdateForm form,
+			BindingResult bindingResult,HttpSession session,Model model) {
 
 		String errorMsg = messageSource.getMessage("shopupdate.error", null, Locale.getDefault());
 
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("errmsg", errorMsg);
-			return "shopProfileUpdateInput";
-		}
-
 		ShopInfo beforeShop = (ShopInfo) session.getAttribute("loginShop");
 
+		form.setShop_id(beforeShop.getShop_id());
+		form.setShop_name(beforeShop.getShop_name());
+		form.setTelephone(beforeShop.getTelephone());
+		form.setRegion_id(beforeShop.getRegion_id());
+		form.setCategory_id(beforeShop.getCategory_id());
+		form.setRegion_id(beforeShop.getRegion_id());
+		form.setBudget(beforeShop.getBudget());
+		form.setNumberofseats(beforeShop.getNumberofseats());
+		form.setComment(beforeShop.getComment());
+		form.setHoliday(beforeShop.getHoliday());
+		form.setShopimage(beforeShop.getShopimage());
+		form.setFoodimage(beforeShop.getFoodimage());
+		form.setStarttime(beforeShop.getStarttime());
+		form.setFinishtime(beforeShop.getFinishtime());
+
+
 		ShopInfo afterShop = new ShopInfo();
-		afterShop.setShop_id(beforeShop.getShop_id());
-		afterShop.setShop_name(beforeShop.getShop_name());
-		afterShop.setTelephone(beforeShop.getTelephone());
+		afterShop.setShop_id(form.getShop_id());
+		afterShop.setShop_name(form.getShop_name());
+		afterShop.setTelephone(form.getTelephone());
+		afterShop.setRegion_id(form.getRegion_id());
 		afterShop.setCategory_id(form.getCategory_id());
 		afterShop.setRegion_id(form.getRegion_id());
 		afterShop.setBudget(form.getBudget());
@@ -74,44 +104,26 @@ public class ShopUpdateController {
 		afterShop.setStarttime(form.getStarttime());
 		afterShop.setFinishtime(form.getFinishtime());
 
+		if((afterShop.equals(beforeShop))&&(afterShop == beforeShop)) {
+			String rErrorMsg = messageSource.getMessage("required.change", null, Locale.getDefault());
+			model.addAttribute("shop", sessionInfo.getPrevShopProfile());
+			model.addAttribute("sAdmin",sessionInfo.getLoginShop());
+			model.addAttribute("errmsg", rErrorMsg);
+
+			return "shopProfileUpdateInput";
+		}
+
+		if((afterShop.getCategory_id()==0)||(afterShop.getCategory_id().equals(null))) {
+			model.addAttribute("shop", sessionInfo.getPrevShopProfile());
+			model.addAttribute("sAdmin",sessionInfo.getLoginShop());
+			model.addAttribute("errmsg", errorMsg);
+			return "shopProfileUpdateInput";
+		}
+
 		shopService.update(afterShop);
 
 		model.addAttribute("sAdmin",sessionInfo.getLoginShop());
 
-		return "shopSeatsUpdateResult";
+		return "shopProfileUpdateResult";
 	}
-
-
-//	@RequestMapping(value ="/shopSeatsUpdate" , method = RequestMethod.POST)
-//	public String seatsUpdate(@Validated @ModelAttribute("seatUpdateForm") ShopUpdateForm form, BindingResult bindingResult,
-//			Model model) {
-//	return "shopSeatsUpdateResult";
-//	}
-
-//	@RequestMapping(value = "/updateInput", method = RequestMethod.POST)
-//	public String updateInput(@Validated @ModelAttribute("seatUpdateForm") ShopUpdateForm form, BindingResult bindingResult,
-//			Model model) {
-//
-//		if (bindingResult.hasFieldErrors("userId")) {
-//			String errorMsg = messageSource.getMessage("required.error", null, Locale.getDefault());
-//			model.addAttribute("errmsg", errorMsg);
-//			return "update";
-//		}
-//
-//		ShopAdmin sAdmin = shopAdminService.findById(form.getUserId());
-//
-//		if(user == null) {
-//			String errorMsg = messageSource.getMessage("id.not.found.error", null, Locale.getDefault());
-//			model.addAttribute("errmsg", errorMsg);
-//			return "update";
-//		}
-//
-//		sessionInfo.setPrevUser(user);
-//
-//		form.setNewName(user.getUserName());
-//		form.setNewTel(user.getTelephone());
-//		form.setNewPassword(user.getPassword());
-//
-//		return "updateInput";
-//	}
 }

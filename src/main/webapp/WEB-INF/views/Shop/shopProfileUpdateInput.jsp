@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,33 +49,35 @@
 				alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">店舗情報更新</h1>
 			<p>
-				編集したい項目を入力してください<br> ※ID、店舗名、TEL、地域情報は変更できません。
+				編集したい項目を入力してください<br>
+				ID、店舗名、TEL、地域情報は変更できません。<br>
+				※は必須項目です
 			</p>
 
 			<c:if test="${not empty errmsg}">
 				<p class="error">${fn:escapeXml(errmsg)}</p>
 			</c:if>
 		</div>
-		<form action="shopUpdate" method="post" enctype="multipart/form-data" >
+		<form:form action="shopUpdate" method="post" enctype="multipart/form-data" modelAttribute="shopUpdateForm">
 			<fieldset>
 				<div class="row">
 					<div class="col-3">
-						<label>店舗ID：</label>${fn:escapeXml(shop.shop_id)}
+						<label>※店舗ID：</label>${fn:escapeXml(shop.shop_id)}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-3">
-						<label>店舗名：</label>${fn:escapeXml(shop.shop_name)}
+						<label>※店舗名：</label>${fn:escapeXml(shop.shop_name)}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label>TEL：</label>${fn:escapeXml(shop.telephone)}
+						<label>※TEL：</label>${fn:escapeXml(shop.telephone)}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label>地域：</label>
+						<label>※地域：</label>
 						<c:if test="${1== shop.region_id}">東京</c:if>
 						<c:if test="${2== shop.region_id}">日本橋</c:if>
 					</div>
@@ -82,34 +85,34 @@
 				<div class="row">
 					<div class="col-3">
 						<label class="mr-sm-2" for="inlineFormCustomSelect">営業開始時間</label>
-						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
+						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="starttime" required>
 						<option selected>営業開始時間を選んでください</option>
-							<option value="1">10:00～</option>
-							<option value="2">11:00～</option>
-							<option value="3">12:00～</option>
-							<option value="4">13:00～</option>
-							<option value="5">14:00～</option>
-							<option value="6">15:00～</option>
-							<option value="7">16:00～</option>
-							<option value="8">17:00～</option>
-							<option value="9">18:00～</option>
-							<option value="10">19:00～</option>
+							<option value="10:00">10:00～</option>
+							<option value="11:00">11:00～</option>
+							<option value="12:00">12:00～</option>
+							<option value="13:00">13:00～</option>
+							<option value="14:00">14:00～</option>
+							<option value="15:00">15:00～</option>
+							<option value="16:00">16:00～</option>
+							<option value="17:00">17:00～</option>
+							<option value="18:00">18:00～</option>
+							<option value="19:00">19:00～</option>
 						</select>
 					</div>
 					<div class="col-3">
 						<label class="mr-sm-2" for="inlineFormCustomSelect">営業終了時間</label>
-						<select class="custom-select d-block w-100" id="inlineFormCustomSelect" required>
+						<select class="custom-select d-block w-100" id="inlineFormCustomSelect" name="finishtime" required>
 						<option selected>営業終了時間を選んでください</option>
-							<option value="1">～20:00</option>
-							<option value="2">～21:00</option>
-							<option value="3">～22:00</option>
-							<option value="4">～23:00</option>
-							<option value="5">～24:00</option>
-							<option value="6">～1:00</option>
-							<option value="7">～2:00</option>
-							<option value="8">～3:00</option>
-							<option value="9">～4:00</option>
-							<option value="10">～5:00</option>
+							<option value="20:00">～20:00</option>
+							<option value="21:00">～21:00</option>
+							<option value="22:00">～22:00</option>
+							<option value="23:00">～23:00</option>
+							<option value="24:00">～24:00</option>
+							<option value="1:00">～1:00</option>
+							<option value="2:00">～2:00</option>
+							<option value="3:00">～3:00</option>
+							<option value="4:00">～4:00</option>
+							<option value="5:00">～5:00</option>
 						</select>
 					</div>
 				</div>
@@ -117,35 +120,28 @@
 					<div class="col">
 						<label class="mr-sm-2" for="inlineFormCustomSelect">定休日</label>
 						<div class="checkbox-inline" id="inlineFormCustomSelect">
-							<label><input type="checkbox" value="月曜">月曜</label>
-
-							<label><input type="checkbox" value="火曜">火曜</label>
-
-							<label><input type="checkbox" value="水曜">水曜</label>
-
-							<label><input type="checkbox" value="木曜">木曜</label>
-
-							<label><input type="checkbox" value="金曜">金曜</label>
-
-							<label><input type="checkbox" value="土曜">土曜</label>
-
-							<label><input type="checkbox" value="日曜">日曜</label>
-
-							<label><input type="checkbox" value="祝日">祝日</label>
-
-							<label><input type="checkbox" value="なし">定休日なし</label>
+							<label><input type="checkbox" name="holiday" value="月曜" />月曜</label>
+							<label><input type="checkbox" name="holiday" value="火曜" />火曜</label>
+							<label><input type="checkbox" name="holiday" value="水曜" />水曜</label>
+							<label><input type="checkbox" name="holiday" value="木曜" />木曜</label>
+							<label><input type="checkbox" name="holiday" value="金曜" />金曜</label>
+							<label><input type="checkbox" name="holiday" value="土曜" />土曜</label>
+							<label><input type="checkbox" name="holiday" value="日曜" />日曜</label>
+							<label><input type="checkbox" name="holiday" value="祝日" />祝日</label>
+							<label><input type="checkbox" name="holiday" value="なし" />定休日なし</label>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label>席数</label><input class="form-control" type="text" placeholder="席数を入力してください。例:50">
+						<label>席数</label><input class="form-control" type="text" name="numberofseats" value="${fn:escapeXml(shop.numberofseats)}"
+						 placeholder="席数を入力してください。例:50" />
 					</div>
 				</div>
 				<div class="row">
 				<div class="col-3">
-					<label class="mr-sm-2" for="inlineFormCustomSelect">料理ジャンル</label>
-					<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
+					<label class="mr-sm-2" for="inlineFormCustomSelect">※料理ジャンル</label>
+					<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="category_id" required>
 					<option selected>料理ジャンルを選んでください</option>
 						<option value="1">和食</option>
 						<option value="2">中華</option>
@@ -155,13 +151,13 @@
 				</div>
 				<div class="col-3">
 					<label class="mr-sm-2" for="inlineFormCustomSelect">予算</label>
-					<select class="custom-select d-block w-100" id="inlineFormCustomSelect" required>
+					<select class="custom-select d-block w-100" id="inlineFormCustomSelect" name="budget" required>
 					<option selected>予算を選んでください</option>
-						<option value="1">～1000</option>
-						<option value="2">1000～1999</option>
-						<option value="3">2000～2999</option>
-						<option value="4">3000～4999</option>
-						<option value="5">5000～</option>
+						<option value="0～1000">～1000</option>
+						<option value="1000～2000">1000～2000</option>
+						<option value="2000～3000">2000～3000</option>
+						<option value="3000～4000">3000～4000</option>
+						<option value="5000～">5000～</option>
 					</select>
 				</div>
 				</div>
@@ -183,8 +179,8 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<label>備考欄</label>
-					<textarea class="form-control" rows="3">${fn:escapeXml(shop.comment)}</textarea>
+					<label class="mr-sm-2" for="inlineFormCustomSelect">備考欄</label>
+					<textarea class="form-control" rows="3" name="comment">${fn:escapeXml(shop.comment)}</textarea>
 				</div>
 			</div>
 			</fieldset>
@@ -198,7 +194,7 @@
 					<button class="btn btn-lg btn-default btn-block" type="button" onclick="location.href='shopProfile'">店舗詳細に戻る</button>
 				</div>
 			</div>
-		</form>
+		</form:form>
 		<div>
 			<a href="shopMenu" class="btn btn-default btn-block">メニュー</a>
 		</div>
