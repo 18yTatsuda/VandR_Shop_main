@@ -84,12 +84,14 @@ public class ShopAuthController {
 	}
 
 	@RequestMapping("/shopProfile")
-	public String profile(Model model) {
-			ShopAdmin admin = sessionInfo.getLoginShop();
-			shopService.locator(admin.getShop_id());
-			model.addAttribute("shop", sessionInfo.getPrevShopProfile());
-			model.addAttribute("sAdmin",sessionInfo.getLoginShop());
+	public String profile(HttpSession session,Model model) {
+
+		ShopInfo loginShop = (ShopInfo) session.getAttribute("loginShop");
+
+		model.addAttribute("shop", loginShop);
+		model.addAttribute("sAdmin",sessionInfo.getLoginShop());
 		return "shopProfile";
+
 	}
 
 	@RequestMapping(value = "/shopLogout", method = RequestMethod.GET)

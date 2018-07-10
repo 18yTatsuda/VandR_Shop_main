@@ -77,16 +77,6 @@ public class ShopUpdateController {
 		form.setTelephone(beforeShop.getTelephone());
 		form.setRegion_id(beforeShop.getRegion_id());
 		form.setCategory_id(beforeShop.getCategory_id());
-		form.setRegion_id(beforeShop.getRegion_id());
-		form.setBudget(beforeShop.getBudget());
-		form.setNumberofseats(beforeShop.getNumberofseats());
-		form.setComment(beforeShop.getComment());
-		form.setHoliday(beforeShop.getHoliday());
-		form.setShopimage(beforeShop.getShopimage());
-		form.setFoodimage(beforeShop.getFoodimage());
-		form.setStarttime(beforeShop.getStarttime());
-		form.setFinishtime(beforeShop.getFinishtime());
-
 
 		ShopInfo afterShop = new ShopInfo();
 		afterShop.setShop_id(form.getShop_id());
@@ -122,6 +112,7 @@ public class ShopUpdateController {
 
 		shopService.update(afterShop);
 
+		session.setAttribute("loginShop",afterShop);
 		model.addAttribute("sAdmin",sessionInfo.getLoginShop());
 
 		return "shopProfileUpdateResult";
