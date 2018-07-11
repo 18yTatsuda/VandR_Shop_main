@@ -53,7 +53,6 @@
 				ID、店舗名、TEL、地域情報は変更できません。<br>
 				※は必須項目です
 			</p>
-
 			<c:if test="${not empty errmsg}">
 				<p class="error">${fn:escapeXml(errmsg)}</p>
 			</c:if>
@@ -85,8 +84,8 @@
 				<div class="row">
 					<div class="col-3">
 						<label class="mr-sm-2" for="inlineFormCustomSelect">営業開始時間</label>
-						<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="starttime" required>
-						<option selected>営業開始時間を選んでください</option>
+						<select  class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="starttime" required>
+						<option value="${fn:escapeXml(shop.starttime)}" selected>営業開始時間を選んでください</option>
 							<option value="10:00">10:00～</option>
 							<option value="11:00">11:00～</option>
 							<option value="12:00">12:00～</option>
@@ -102,7 +101,7 @@
 					<div class="col-3">
 						<label class="mr-sm-2" for="inlineFormCustomSelect">営業終了時間</label>
 						<select class="custom-select d-block w-100" id="inlineFormCustomSelect" name="finishtime" required>
-						<option selected>営業終了時間を選んでください</option>
+						<option value="${fn:escapeXml(shop.finishtime)}" selected>営業終了時間を選んでください</option>
 							<option value="20:00">～20:00</option>
 							<option value="21:00">～21:00</option>
 							<option value="22:00">～22:00</option>
@@ -118,7 +117,7 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<label class="mr-sm-2" for="inlineFormCustomSelect">定休日</label>
+						<label class="mr-sm-2" for="inlineFormCustomSelect">※定休日</label>
 						<div class="checkbox-inline" id="inlineFormCustomSelect">
 							<label><input type="checkbox" name="holiday" value="月曜" />月曜</label>
 							<label><input type="checkbox" name="holiday" value="火曜" />火曜</label>
@@ -142,7 +141,7 @@
 				<div class="col-3">
 					<label class="mr-sm-2" for="inlineFormCustomSelect">※料理ジャンル</label>
 					<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="category_id" required>
-					<option selected>料理ジャンルを選んでください</option>
+					<option value="${fn:escapeXml(shop.category_id)}" selected>料理ジャンルを選んでください</option>
 						<option value="1">和食</option>
 						<option value="2">中華</option>
 						<option value="3">イタリアン</option>
@@ -151,8 +150,8 @@
 				</div>
 				<div class="col-3">
 					<label class="mr-sm-2" for="inlineFormCustomSelect">予算</label>
-					<select class="custom-select d-block w-100" id="inlineFormCustomSelect" name="budget" required>
-					<option selected>予算を選んでください</option>
+					<select class="custom-select d-block w-100" id="inlineFormCustomSelect" name="budget"  required>
+					<option value="${fn:escapeXml(shop.budget)}" selected>予算を選んでください</option>
 						<option value="0～1000">～1000</option>
 						<option value="1000～2000">1000～2000</option>
 						<option value="2000～3000">2000～3000</option>

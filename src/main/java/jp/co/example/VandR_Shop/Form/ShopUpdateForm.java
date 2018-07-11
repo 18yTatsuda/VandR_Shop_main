@@ -19,8 +19,12 @@ public class ShopUpdateForm {
 	@NotNull
 	private Integer category_id;
 
+	private Integer newCategory_id;
+
 	@NotNull
 	private Integer region_id;
+
+	private Integer newRegion_id;
 
 	private String budget;
 	private String numberofseats;
@@ -30,6 +34,15 @@ public class ShopUpdateForm {
 	private String foodimage;
 	private String starttime;
 	private String finishtime;
+
+	private String newBudget;
+	private String newNumberofseats;
+	private String newComment;
+	private String newHoliday;
+	private String newShopimage;
+	private String newFoodimage;
+	private String newStarttime;
+	private String newFinishtime;
 
 
 	public Integer getShop_id() {
@@ -122,4 +135,76 @@ public class ShopUpdateForm {
 	public void setFinishtime(String finishtime) {
 		this.finishtime = finishtime;
 	}
+
+
+
+	public Integer getNewCategory_id() {
+		return newCategory_id;
+	}
+	public void setNewCategory_id(Integer newCategory_id) {
+		this.newCategory_id = newCategory_id;
+	}
+	public Integer getNewRegion_id() {
+		return newRegion_id;
+	}
+	public void setNewRegion_id(Integer newRegion_id) {
+		this.newRegion_id = newRegion_id;
+	}
+	public String getNewBudget() {
+		return newBudget;
+	}
+	public void setNewBudget(String newBudget) {
+		this.newBudget = newBudget;
+	}
+	public String getNewNumberofseats() {
+		return newNumberofseats;
+	}
+	public void setNewNumberofseats(String newNumberofseats) {
+		this.newNumberofseats = newNumberofseats;
+	}
+	public String getNewComment() {
+		return newComment;
+	}
+	public void setNewComment(String newComment) {
+		this.newComment = newComment;
+	}
+	public String getNewHoliday() {
+		return newHoliday;
+	}
+	public void setNewHoliday(String newHoliday) {
+		this.newHoliday = newHoliday;
+	}
+	public String getNewShopimage() {
+		return newShopimage;
+	}
+	public void setNewShopimage(String newShopimage) {
+		this.newShopimage = newShopimage;
+	}
+	public String getNewFoodimage() {
+		return newFoodimage;
+	}
+	public void setNewFoodimage(String newFoodimage) {
+		this.newFoodimage = newFoodimage;
+	}
+	public String getNewStarttime() {
+		return newStarttime;
+	}
+	public void setNewStarttime(String newStarttime) {
+		this.newStarttime = newStarttime;
+	}
+	public String getNewFinishtime() {
+		return newFinishtime;
+	}
+	public void setNewFinishtime(String newFinishtime) {
+		this.newFinishtime = newFinishtime;
+	}
+
+
+	public boolean hasRequiredError() {
+		return (newHoliday == null || newHoliday.isEmpty())
+				|| (newCategory_id == null)
+				|| (newRegion_id == null);
+	}
 }
+
+

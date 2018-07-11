@@ -105,15 +105,15 @@
 				<div class="row">
 					<div class="col">
 					<label>店舗イメージ:</label>
-						 <img class="d-block mx-auto mb-4 img-thumbnail" src="../../../image/ダウンロード.png" alt="店舗イメージ" width="400" height="auto">
-						 <img src="../../../image/${fn:escapeXml(shop.shopimage)}" alt="店舗イメージ" width="400" height="auto">
+						 <img class="d-block mx-auto mb-4 img-thumbnail" src="/image/ダウンロード.png" alt="店舗イメージ" width="400" height="auto">
+						 <img src="/image/${fn:escapeXml(shop.shopimage)}" alt="店舗イメージ" width="400" height="auto">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
 					<label>料理イメージ:</label>
-						 <img class="d-block mx-auto mb-4 img-thumbnail" src="../../../image/img_91882_6.jpg" alt="料理イメージ" width="400" height="auto">
-						 <img src="../../../image/${fn:escapeXml(shop.foodimage)}" alt="料理イメージ" width="400" height="auto">
+						 <img class="d-block mx-auto mb-4 img-thumbnail" src="/image/img_91882_6.jpg" alt="料理イメージ" width="400" height="auto">
+						 <img src="/image/${fn:escapeXml(shop.foodimage)}" alt="料理イメージ" width="400" height="auto">
 					</div>
 				</div>
 				<div class="row">

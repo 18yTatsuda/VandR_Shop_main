@@ -96,4 +96,77 @@ public class ShopInfo implements Serializable {
 	public void setFinishtime(String finishtime) {
 		this.finishtime = finishtime;
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShopInfo other = (ShopInfo) obj;
+		if (category_id == null) {
+			if (other.category_id != null)
+				return false;
+		} else if (!category_id.equals(other.category_id))
+			return false;
+
+		if (budget == null) {
+			if (other.budget != null)
+				return false;
+		} else if (!budget.equals(other.budget))
+			return false;
+
+		if (numberofseats == null) {
+			if (other.numberofseats != null)
+				return false;
+		} else if (!numberofseats.equals(other.numberofseats))
+			return false;
+
+		if (comment == null) {
+			if (other.comment != null)
+				return false;
+		} else if (!comment.equals(other.comment))
+			return false;
+
+		if (numberofseats == null) {
+			if (other.numberofseats != null)
+				return false;
+		} else if (!numberofseats.equals(other.numberofseats))
+			return false;
+
+		if (holiday == null) {
+			if (other.holiday != null)
+				return false;
+		} else if (!holiday.equals(other.holiday))
+			return false;
+
+		if (shopimage == null) {
+			if (other.shopimage != null)
+				return false;
+		} else if (!shopimage.equals(other.shopimage))
+			return false;
+
+		if (foodimage == null) {
+			if (other.foodimage != null)
+				return false;
+		} else if (!foodimage.equals(other.foodimage))
+			return false;
+
+		if (starttime == null) {
+			if (other.starttime != null)
+				return false;
+		} else if (!starttime.equals(other.starttime))
+			return false;
+
+		if (finishtime == null) {
+			if (other.finishtime != null)
+				return false;
+		} else if (!finishtime.equals(other.finishtime))
+			return false;
+
+		return true;
+	}
 }
